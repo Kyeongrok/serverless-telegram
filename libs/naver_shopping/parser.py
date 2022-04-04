@@ -6,9 +6,11 @@ def getProductInfo(li):
     price = li.find("strong", {"class":"basicList_price__2r23_"}).find('span')
     a_tit = li.find("a", {"class":"basicList_link__1MaTN"})
     href = a_tit['href']
+    category = li.find('div', {'class':'basicList_depth__2QIie'}).findAll('span')
+    c = [item.text for item in category]
     thumbnail_link = li.find('div', {'class':'thumbnail_thumb_wrap__1pEkS'}).find('a')
 
-    return {"name":alt, "price":price.text.replace(",", ""), "link":href}
+    return {"name":alt, "price":price.text.replace(",", ""), "link":href, 'category':c}
 
 def parse(pageString):
     bs_obj = BeautifulSoup(pageString, "html.parser")
