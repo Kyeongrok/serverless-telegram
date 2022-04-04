@@ -1,13 +1,18 @@
-import json
-import numpy as np
+import json, requests
 
 
-def hello(event, context):
-    a = np.arange(15).reshape(3, 5)
+def call_telegram(event, context):
+
+    qsp = event['queryStringParameters']
+
+    message = json.dumps(qsp)
+    url = f'https://api.telegram.org/bot281761192:AAE7h61HIio8eviXggpssYHrJJ58nHWT32A/sendMessage?chat_id=173075344&text={message}'
+    r = requests.get(url)
+
     body = {
         "message": "Go Serverless v1.0! Your function executed successfully!",
-        "a": str(a),
-        "input": event
+        "input": event,
+        "r": r.json()
     }
 
     response = {
@@ -33,4 +38,4 @@ def hello(event, context):
 
 
 if __name__ == "__main__":
-    hello('', '')
+    call_telegram('', '')

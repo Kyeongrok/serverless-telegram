@@ -15,7 +15,15 @@
 ### local test
 * sls invoke local -f hello --log
 
+
+### 데이터 넘기기
+* sls invoke -f call-telegram --log -d '{"a":"bar"}'
+
 ### 로그 보기
 * sls logs -f hello
 
+
+## API
+### Endpoint
+GET - https://jevf3cn1za.execute-api.ap-northeast-2.amazonaws.com/users/create
 
