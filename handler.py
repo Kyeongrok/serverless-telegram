@@ -1,11 +1,12 @@
 import json, requests
+from urllib import parse
 
 
 def call_telegram(event, context):
 
     qsp = event['queryStringParameters']
 
-    message = json.dumps(qsp)
+    message = parse.unquote(json.dumps(qsp))
     url = f'https://api.telegram.org/bot281761192:AAE7h61HIio8eviXggpssYHrJJ58nHWT32A/sendMessage?chat_id=173075344&text={message}'
     r = requests.get(url)
 
