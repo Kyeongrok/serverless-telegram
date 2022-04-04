@@ -2,22 +2,30 @@ import json, requests
 from urllib import parse
 
 
-def call_telegram(event, context):
+def call_telegram(event:dict, context):
 
-    qsp = event['queryStringParameters']
+    r = ''
+    status_code = 200
 
-    message = parse.unquote(json.dumps(qsp))
-    url = f'https://api.telegram.org/bot281761192:AAE7h61HIio8eviXggpssYHrJJ58nHWT32A/sendMessage?chat_id=173075344&text={message}'
-    r = requests.get(url)
+    if event.get('queryStringParameters') != None:
+        try:
+            qsp = event['queryStringParameters']
+            message = {k: parse.unquote(str(v)) for k, v in qsp.items()}
+            url = f'https://api.telegram.org/bot281761192:AAE7h61HIio8eviXggpssYHrJJ58nHWT32A/sendMessage?chat_id=173075344&text={message}'
+            r = requests.get(url).json()
+
+        except Exception as e:
+            r = e
+            status_code = 400
 
     body = {
         "message": "Go Serverless v1.0! Your function executed successfully!",
         "input": event,
-        "r": r.json()
+        "r": str(r)
     }
 
     response = {
-        "statusCode": 200,
+        "statusCode": status_code,
         "headers": {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Credentials': True,
