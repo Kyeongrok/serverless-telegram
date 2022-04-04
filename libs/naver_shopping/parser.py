@@ -1,12 +1,12 @@
 from bs4 import BeautifulSoup
 
 def getProductInfo(li):
-    print(li)
     img = li.find("img")
     alt = img['alt']
     price = li.find("strong", {"class":"basicList_price__2r23_"}).find('span')
     a_tit = li.find("a", {"class":"basicList_link__1MaTN"})
     href = a_tit['href']
+    thumbnail_link = li.find('div', {'class':'thumbnail_thumb_wrap__1pEkS'}).find('a')
 
     return {"name":alt, "price":price.text.replace(",", ""), "link":href}
 
