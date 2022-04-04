@@ -1,4 +1,4 @@
-import json, requests
+import json, requests, os
 from urllib import parse
 
 
@@ -6,12 +6,11 @@ def call_telegram(event:dict, context):
 
     r = ''
     status_code = 200
-
-    if event.get('queryStringParameters') != None:
+    if isinstance(event, dict) and event.get('queryStringParameters') != None:
         try:
             qsp = event['queryStringParameters']
             message = {k: parse.unquote(str(v)) for k, v in qsp.items()}
-            url = f'https://api.telegram.org/bot281761192:AAE7h61HIio8eviXggpssYHrJJ58nHWT32A/sendMessage?chat_id=173075344&text={message}'
+            url = f'https://api.telegram.org/bot281761192:{os.getenv("TELEGRAM_ACCESS_TOKEN")}/sendMessage?chat_id=173075344&text={message}'
             r = requests.get(url).json()
 
         except Exception as e:

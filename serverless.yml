@@ -25,6 +25,17 @@ plugins:
   - serverless-python-requirements
 #  - serverless-wsgi
 
+provider:
+  name: aws
+  runtime: python3.8
+  lambdaHashingVersion: 20201221
+  stage: dev
+  region: ap-northeast-2
+  environment:
+    TELEGRAM_ACCESS_TOKEN: 'AAE7h61HIio8eviXggpssYHrJJ58nHWT32A'
+    MYSQL_HOST: '<hostname>'
+    MYSQL_USERNAME: '<username>'
+    MYSQL_PASSWORD: '1234'
 
 custom:
 #  wsgi:
@@ -32,7 +43,6 @@ custom:
 #    packRequirements: false
   pythonRequirements:
     dockerizePip: non-linux
-
 functions:
   call-telegram:
     handler: handler.call_telegram
@@ -42,12 +52,6 @@ functions:
           #          cors: true
           method: get
 
-provider:
-  name: aws
-  runtime: python3.8
-  lambdaHashingVersion: 20201221
-  stage: dev
-  region: ap-northeast-2
 
 package:
   exclude:
