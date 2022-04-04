@@ -7,7 +7,7 @@
 * sls deploy --stage dev
 
 ### sls 특정 function만 배포
-* sls deploy function -f findBetween --stage dev
+* sls deploy function -f crawl-naver --stage dev
 
 ### 배포 후 test
 * sls invoke -f hello --log

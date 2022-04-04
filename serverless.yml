@@ -49,9 +49,14 @@ functions:
     events:
       - httpApi:
           path: /telegram/send-message
-          #          cors: true
           method: get
 
+  crawl-naver:
+    handler: handler.crawl_naver
+    events:
+      - httpApi:
+          path: /crawl/naver-shopping/{keyword}
+          method: get
 
 package:
   exclude:
